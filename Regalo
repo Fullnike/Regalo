@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Feliz Cumpleaños!</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f7e1ff; /* Fondo suave de cumpleaños */
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+        }
+
+        /* --- Estilos del Encabezado --- */
+        h1 {
+            color: #ff69b4; /* Rosa fuerte */
+            font-size: 3em;
+            margin-bottom: 20px;
+            animation: bounce 1s infinite alternate; /* Animación de rebote sutil */
+        }
+
+        @keyframes bounce {
+            from { transform: translateY(0); }
+            to { transform: translateY(-5px); }
+        }
+
+        /* --- Estilos del Botón --- */
+        .gift-button {
+            padding: 15px 30px;
+            font-size: 1.2em;
+            color: white;
+            background-color: #00bcd4; /* Azul vibrante */
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.1s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .gift-button:hover {
+            background-color: #0097a7;
+        }
+
+        .gift-button:active {
+            transform: scale(0.98);
+        }
+
+        /* --- Estilos del Contenedor del Regalo --- */
+        .gift-container {
+            display: none; /* Inicialmente oculto */
+            position: relative;
+            width: 250px;
+            height: 250px;
+            perspective: 1000px;
+        }
+
+        /* --- Estilos de la Tapa del Regalo --- */
+        .gift-lid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50px;
+            background-color: #ff4500; /* Naranja/Rojo para la tapa */
+            border-radius: 10px 10px 0 0;
+            transform-origin: bottom center;
+            transition: transform 1s ease-out;
+            z-index: 2;
+        }
+
+        /* Estilo para cuando la tapa está abierta */
+        .open .gift-lid {
+            transform: rotateX(90deg) translateY(-50px);
+        }
+
+        /* --- Estilos de la Caja del Regalo --- */
+        .gift-box {
+            position: absolute;
+            top: 50px;
+            left: 0;
+            width: 100%;
+            height: 200px;
+            background-color: #ffa07a; /* Salmón claro para la caja */
+            border-radius: 0 0 10px 10px;
+            z-index: 1;
+        }
+
+        /* --- Estilos del Contenido del Regalo (Oso) --- */
+        .gift-content {
+            position: absolute;
+            top: 50px;
+            left: 0;
+            width: 100%;
+            height: 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #fffaf0; /* Fondo del contenido */
+            border-radius: 0 0 10px 10px;
+            z-index: 0;
+            opacity: 0; /* Inicialmente invisible */
+            transition: opacity 0.5s ease-in 0.5s; /* Transición con retraso */
+        }
+        
+        /* Estilo para mostrar el contenido cuando el regalo está abierto */
+        .open .gift-content {
+            opacity: 1;
+            z-index: 3; /* Asegura que se vea encima de la caja */
+        }
+
+        /* --- Estilos del Oso de Peluche y Corazón --- */
+        .bear-and-message {
+            text-align: center;
+        }
+
+        .teddy-bear {
+            font-size: 5em; /* Tamaño del oso */
+            line-height: 1;
+            color: #8b4513; /* Color marrón del oso */
+        }
+
+        .heart {
+            color: #ff6347; /* Rojo coral para el corazón */
+            font-size: 1.5em;
+        }
+
+        .message {
+            font-size: 1.5em;
+            color: #333;
+            margin-top: 5px;
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1>¡Feliz Cumpleaños! 🎉</h1>
+    
+    <button class="gift-button" onclick="openGift()">Presiona para abrir tu regalo</button>
+    
+    <div id="gift" class="gift-container">
+        <div class="gift-lid"></div>
+        
+        <div class="gift-box"></div>
+        
+        <div class="gift-content">
+            <div class="bear-and-message">
+                <div class="teddy-bear">🐻</div> 
+                <div class="heart">💖</div>
+                <div class="message">Para ti 💖</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openGift() {
+            const giftContainer = document.getElementById('gift');
+            const giftButton = document.querySelector('.gift-button');
+            
+            // 1. Mostrar el regalo y cambiar el texto del botón
+            giftContainer.style.display = 'block';
+            giftButton.textContent = '¡Tu regalo está abierto!';
+            giftButton.disabled = true; // Deshabilitar para evitar múltiples clics
+            
+            // 2. Usar un pequeño retraso para asegurar que el display:block se aplique
+            setTimeout(() => {
+                // 3. Añadir la clase 'open' para disparar la animación CSS
+                giftContainer.classList.add('open');
+            }, 50);
+        }
+    </script>
+
+</body>
+</html>
